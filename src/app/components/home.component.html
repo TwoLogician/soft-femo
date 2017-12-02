@@ -1,0 +1,122 @@
+<div class="animated fadeIn padding10" style="padding-top: 3.5rem">
+    <div class="grid">
+        <div class="row cells4">
+            <div class="cell">
+                <div class="accordion" data-role="accordion">
+                    <div class="frame">
+                        <div class="heading">Shop
+                            <span class="mif-shop icon"></span>
+                        </div>
+                        <div class="content window">
+                            <div class="input-control full-size text" data-role="input">
+                                <input [(ngModel)]="shop.name" placeholder="Shop Name" type="text">
+                                <button class="button animated fadeIn primary" (click)="saveShop()" *ngIf="!shop['key']">
+                                    <span class="mif-plus"></span>
+                                </button>
+                                <button class="button animated fadeIn success" (click)="saveShop(shop['key'])" *ngIf="shop['key']">
+                                    <span class="mif-floppy-disk"></span>
+                                </button>
+                            </div>
+                            <hr class="bg-grayLighter thin">
+                            <div class="window">
+                                <table class="table hovered">
+                                    <tbody>
+                                        <tr class="animated fadeIn" *ngFor="let item of shops">
+                                            <td class="full-size">{{item.name}}</td>
+                                            <td>
+                                                <a (click)="initShop(item)">
+                                                    <span class="mif-pencil"></span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="fg-red" (click)="deleteShop(item)">
+                                                    <span class="mif-bin"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="frame active">
+                        <div class="heading">Food
+                            <span class="mif-spoon-fork icon"></span>
+                        </div>
+                        <div class="content window">
+                            <div class="input-control full-size select">
+                                <select [(ngModel)]="food.shopKey">
+                                    <option value="">Select Shop</option>
+                                    <option *ngFor="let item of shops" [value]="item['key']">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="input-control full-size text">
+                                <input [(ngModel)]="food.name" placeholder="Food Name" type="text">
+                            </div>
+                            <div class="input-control full-size text">
+                                <input [(ngModel)]="food.note" placeholder="Note" type="text">
+                            </div>
+                            <label class="input-control checkbox small-check">
+                                <input [(ngModel)]="food.good" type="checkbox">
+                                <span class="check"></span>
+                                <span class="caption">Good</span>
+                            </label>
+                            <button class="button animated fadeIn full-size primary" (click)="saveFood()" *ngIf="!food['key']">
+                                Add
+                            </button>
+                            <button class="button animated fadeIn full-size success" (click)="saveFood(food['key'])" *ngIf="food['key']">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell colspan3">
+                <div class="window padding10">
+                    <h4>Femo</h4>
+                    <hr>
+                    <div class="input-control full-size text" data-role="input">
+                        <span class="mif-search prepend-icon"></span>
+                        <input [(ngModel)]="keyword" placeholder="Search.." type="text">
+                    </div>
+                    <hr class="bg-grayLighter thin">
+                    <div class="window">
+                        <table class="table hovered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Shop</th>
+                                    <th>Food</th>
+                                    <th>Note</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="animated fadeIn" *ngFor="let item of getFoods()">
+                                    <td class="align-center">
+                                        <span class="mif-thumbs-up fg-green" *ngIf="item.good"></span>
+                                        <span class="mif-shit fg-grayLight" *ngIf="!item.good"></span>
+                                    </td>
+                                    <td>{{getShopName(item.shopKey)}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.note}}</td>
+                                    <td class="align-center">
+                                        <a (click)="initFood(item)">
+                                            <span class="mif-pencil"></span>
+                                        </a>
+                                    </td>
+                                    <td class="align-center">
+                                        <a class="fg-red" (click)="deleteFood(item)">
+                                            <span class="mif-bin"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

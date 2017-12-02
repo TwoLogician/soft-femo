@@ -1,0 +1,21 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="app-bar fixed-top darcula" data-role="appbar">
+    <a class="app-bar-element branding">Femo</a>
+    <span class="app-bar-divider"></span>
+    <ng-template #showLogin>
+        <div class="app-bar-element animated fadeIn place-right" (click)="signIn()">
+            <span class="mif-enter"></span> Sign in
+        </div>
+    </ng-template>
+    <div class="app-bar-element animated fadeIn place-right" *ngIf="afAuth.authState | async; let user; else showLogin">
+        <span class="dropdown-toggle">
+            <span class="mif-user"></span> {{user.displayName}}
+        </span>
+        <ul class="d-menu place-right" data-role="dropdown">
+            <li>
+                <a (click)="signOut()">Sign out</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<router-outlet *ngIf="afAuth.authState | async"></router-outlet>
